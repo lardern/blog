@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜Xiaoming&#39;s blog
+        使用Github+Hexo+七牛云实现个人博客搭建｜Xiaoming&#39;s blog
         
     </title>
 
@@ -153,7 +153,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
+                    <h1>使用Github+Hexo+七牛云实现个人博客搭建</h1>
                     
                     <span class="meta">
                          作者 小明
@@ -163,6 +163,9 @@
                     </span>
                     <div class="tags text-center">
                         
+                        <a class="tag" href="/tags/#github pages,hexo,qiniu,blog"
+                           title="github pages,hexo,qiniu,blog">github pages,hexo,qiniu,blog</a>
+                        
                     </div>
                 </div>
             </div>
@@ -170,7 +173,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            使用Github+Hexo+七牛云实现个人博客搭建
         </span>
     </div>
 </header>
@@ -181,25 +184,62 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+                <h2 id="用到的工具"><a href="#用到的工具" class="headerlink" title="用到的工具"></a>用到的工具</h2><ul>
+<li><a href="https://github.com" target="_blank" rel="external">Github</a> 存放博客文件，相当于免费的个人空间吧。</li>
+<li><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> 博客引擎，依赖Nodejs，运行在本地或者服务器都可以。他的作用就是把你用Markdown格式写的文章，生成html静态文件，并且能生成目录、支持主题样式</li>
+<li><a href="https://qiniu.com" target="_blank" rel="external">七牛云</a> 用来处理图片，提供图片处理功能，比如缩放、裁剪、加水印等。</li>
+<li><a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="external">七牛云Hexo插件</a>能自动把图片同步到七年云上，省得手动上传。</li>
+</ul>
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h2><ol>
+<li>上去注册一个账号，username</li>
+<li>创建一个仓库，名称设为：username.github.io，只有这样才能在根目录<code>https://username.github.io</code> 访问博客。如果设置成别的名称，访问地址就是 <code>https://username.github.io/repository_name</code> </li>
+<li>这就行了</li>
+</ol>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><ol>
+<li>安装<a href="https://nodejs.org" target="_blank" rel="external">Nodejs</a></li>
+<li><p>安装 Hexo ，打开命令行，输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化博客，命令行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo init blog</div><div class="line">$ <span class="built_in">cd</span> blog</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+</li>
+<li><p>一个博客就成了，当然现在只是本地的。可以启动本地服务试试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>然后访问 <code>http://localhost:4000</code>，默认端口是4000，如果已经占用了（福昕PDF阅读器有个服务会占用这个）,使用参数 <code>-p 端口号</code> 来更改。<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server -p 8888</div></pre></td></tr></table></figure></p>
+<p>Hexo就是这么简单，详细请参考官方文档: <a href="https://hexo.io/docs/" target="_blank" rel="external">Hexo Docs</a></p>
+<h3 id="写新文章"><a href="#写新文章" class="headerlink" title="写新文章"></a>写新文章</h3><p>在博客的根目录使用命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"文章标题"</span></div></pre></td></tr></table></figure></p>
+<p>Hexo会在 source/_posts 文件夹下生成一个 文章标题.md 的文件，用文本编辑器编辑保存就可以了。<br>写好文章要重新生成才能看到效果，命令如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div></pre></td></tr></table></figure></p>
+<h3 id="上传到Github"><a href="#上传到Github" class="headerlink" title="上传到Github"></a>上传到Github</h3><p>hexo支持多种一键部署方式，包括 git、ftp、sftp 等等，这里只说 git。<br>在博客根目录下有个文件 <code>_config.yml</code> ，这是 Hexo的配置文件。<br>打开这个文件，找到 deploy，把github的仓库地址配置好。<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repo: https://github.com/xxxxxx.git</div><div class="line">branch: master</div></pre></td></tr></table></figure></p>
+<p>以后写了新文章需要发布，在博客根目录下使用 deploy 命令就可以了<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
+<h2 id="七牛云"><a href="#七牛云" class="headerlink" title="七牛云"></a>七牛云</h2><ol>
+<li>注册，</li>
+<li>创建对象存储空间，名称随便起，记住一会要用，得到一个测试域名：xxxx.bkt.clouddn.com。现在创建对象存储空间要求账户有10块钱，充值进去并不会扣</li>
+<li>在个人中心——密钥管理，里找到 AcessKey 和 SecretKey</li>
+<li><p>安装<a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="external">七牛云Hexo插件</a>，在根目录使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-qiniu-sync --save</div></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>_config.yml</code> 中加入配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#七牛云存储设置</div><div class="line">##offline       是否离线. 离线状态将使用本地地址渲染</div><div class="line">##sync          是否同步</div><div class="line">##bucket        空间名称.</div><div class="line">##access_key    上传密钥AccessKey</div><div class="line">##secret_key    上传密钥SecretKey</div><div class="line">##secret_file   秘钥文件路径，可以将access_key secret_key 两个属性配置到文件内，防止泄露，json格式。绝对路径相对路径均可。不使用文件形式配置的话留空</div><div class="line">##dirPrefix     上传的资源子目录前缀.如设置，需与urlPrefix同步 </div><div class="line">##urlPrefix     外链前缀.</div><div class="line">##up_host      上传服务器路径,一般为 http://upload.qiniu.com，华北区域为 http://up-z1.qiniu.com</div><div class="line">##local_dir     本地目录.</div><div class="line">##update_exist  是否更新已经上传过的文件(仅文件大小不同或在上次上传后进行更新的才会重新上传)</div><div class="line">##image/js/css  子参数folder为不同静态资源种类的目录名称，一般不需要改动</div><div class="line">##image.extend  这是个特殊参数，用于生成缩略图或加水印等操作。具体请参考http://developer.qiniu.com/docs/v6/api/reference/fop/image/ </div><div class="line">##              可使用基本图片处理、高级图片处理、图片水印处理这3个接口。例如 ?imageView2/2/w/500 即生成宽度最多500px的缩略图</div><div class="line">qiniu:</div><div class="line">  offline: false</div><div class="line">  sync: true</div><div class="line">  bucket: bucket_name</div><div class="line">  secret_file: sec/qn.json or C:</div><div class="line">  access_key: AccessKey</div><div class="line">  secret_key: SecretKey</div><div class="line">  dirPrefix: static</div><div class="line">  urlPrefix: http://bucket_name.qiniudn.com/static</div><div class="line">  up_host: http://upload.qiniu.com</div><div class="line">  local_dir: static</div><div class="line">  update_exist: true</div><div class="line">  image: </div><div class="line">    folder: images</div><div class="line">    extend: </div><div class="line">  js:</div><div class="line">    folder: js</div><div class="line">  css:</div><div class="line">    folder: css</div></pre></td></tr></table></figure>
+</li>
+<li><p>插件装好，配置好之后，要在根目录执行一次命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>插件会在根目录生成一个 static 文件夹，把图片拷贝到 static/images 下，下次运行 <code>hexo qiniu sync</code> 或者 <code>hexo server</code> 命令时，插件会自动上传图片</p>
+<ol>
+<li>在文章里引用图片时使用如下标记<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&#123;% qnimg imageFile attr1:value1 attr2:value2 &apos;attr3:value31 value32 value3n&apos; [extend:?imageView2/2/w/600 | normal:yes] %&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&#123;% qnimg test/demo.png title:图片标题 alt:图片说明 &apos;class:class1 class2&apos; extend:?imageView2/2/w/600 %&#125;</div></pre></td></tr></table></figure></p>
+<p>翻译成HTML就是：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;img title=&quot;图片标题&quot; alt=&quot;图片说明&quot; class=&quot;class1 class2&quot; src=&quot;http://xxxx.u.qiniudn.com/images/test/demo.png?imageView2/2/w/600&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>测试：<br><img title="图片标题" alt="图片说明" class="class1 class2" src="http://on8y8zp0v.bkt.clouddn.com/static/images/SteepSheep.jpg?imageView2/2/w/600"></p>
 
                 <hr>
                 
 
                 <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2017/03/23/HelloWorld/" data-toggle="tooltip" data-placement="top"
-                           title="HelloWorld">&larr; Previous Post</a>
-                    </li>
                     
                     
                 </ul>
@@ -212,7 +252,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用到的工具"><span class="toc-text">用到的工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github"><span class="toc-text">Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo"><span class="toc-text">Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Hexo"><span class="toc-text">安装 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写新文章"><span class="toc-text">写新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传到Github"><span class="toc-text">上传到Github</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七牛云"><span class="toc-text">七牛云</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -233,6 +273,9 @@
                         <a href="/tags/">FEATURED TAGS</a>
                     </h5>
                     <div class="tags">
+                        
+                        <a class="tag" href="/tags/#github pages,hexo,qiniu,blog"
+                           title="github pages,hexo,qiniu,blog">github pages,hexo,qiniu,blog</a>
                         
                     </div>
                 </section>
@@ -303,8 +346,6 @@
                     Copyright &copy; Xiaoming 2017
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>

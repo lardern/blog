@@ -80,7 +80,7 @@
                         
 							
                         <li>
-                            <a href="/tags/">tags</a>
+                            <a href="/works/">works</a>
                         </li>
 							
 						
@@ -88,7 +88,7 @@
                         
 							
                         <li>
-                            <a href="/works/">works</a>
+                            <a href="/tags/">tags</a>
                         </li>
 							
 						
@@ -163,8 +163,20 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#github pages,hexo,qiniu,blog"
-                           title="github pages,hexo,qiniu,blog">github pages,hexo,qiniu,blog</a>
+                        <a class="tag" href="/tags/#github"
+                           title="github">github</a>
+                        
+                        <a class="tag" href="/tags/#pages"
+                           title="pages">pages</a>
+                        
+                        <a class="tag" href="/tags/#hexo"
+                           title="hexo">hexo</a>
+                        
+                        <a class="tag" href="/tags/#qiniu"
+                           title="qiniu">qiniu</a>
+                        
+                        <a class="tag" href="/tags/#blog"
+                           title="blog">blog</a>
                         
                     </div>
                 </div>
@@ -212,6 +224,7 @@
 <h3 id="写新文章"><a href="#写新文章" class="headerlink" title="写新文章"></a>写新文章</h3><p>在博客的根目录使用命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"文章标题"</span></div></pre></td></tr></table></figure></p>
 <p>Hexo会在 source/_posts 文件夹下生成一个 文章标题.md 的文件，用文本编辑器编辑保存就可以了。<br>写好文章要重新生成才能看到效果，命令如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div></pre></td></tr></table></figure></p>
 <h3 id="上传到Github"><a href="#上传到Github" class="headerlink" title="上传到Github"></a>上传到Github</h3><p>hexo支持多种一键部署方式，包括 git、ftp、sftp 等等，这里只说 git。<br>在博客根目录下有个文件 <code>_config.yml</code> ，这是 Hexo的配置文件。<br>打开这个文件，找到 deploy，把github的仓库地址配置好。<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repo: https://github.com/xxxxxx.git</div><div class="line">branch: master</div></pre></td></tr></table></figure></p>
+<p>安装 git deploy 插件：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
 <p>以后写了新文章需要发布，在博客根目录下使用 deploy 命令就可以了<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
 <h2 id="七牛云"><a href="#七牛云" class="headerlink" title="七牛云"></a>七牛云</h2><ol>
 <li>注册，</li>
@@ -274,8 +287,20 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#github pages,hexo,qiniu,blog"
-                           title="github pages,hexo,qiniu,blog">github pages,hexo,qiniu,blog</a>
+                        <a class="tag" href="/tags/#github"
+                           title="github">github</a>
+                        
+                        <a class="tag" href="/tags/#pages"
+                           title="pages">pages</a>
+                        
+                        <a class="tag" href="/tags/#hexo"
+                           title="hexo">hexo</a>
+                        
+                        <a class="tag" href="/tags/#qiniu"
+                           title="qiniu">qiniu</a>
+                        
+                        <a class="tag" href="/tags/#blog"
+                           title="blog">blog</a>
                         
                     </div>
                 </section>

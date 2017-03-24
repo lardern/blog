@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Xiaoming&#39;s blog
+        Intellij IDEA 使用 Tomcat 异常｜Xiaoming&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://lardern.github.io/archives/2017/">
+    <link rel="canonical" href="http://lardern.github.io/2017/03/24/intellij-tomcat-can-t-debug/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -131,83 +131,132 @@
 </script>
 
 <!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://on8y8zp0v.bkt.clouddn.com/PingganVillage.jpg?imageView2/2/w/750">
+
+
 <style>
-    .intro-header .site-heading {
-        margin: 50px;
+    
+    header.intro-header {
+        background-image: url('http://on8y8zp0v.bkt.clouddn.com/PingganVillage.jpg?imageView2/2/w/750')
     }
+
+    
 </style>
 
-<!-- Page Header -->
 <header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading text-center">
-                    <h1>archives</h1>
-                    <span class="subheading">可以根据归档日期检索所有文件</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Intellij IDEA 使用 Tomcat 异常</h1>
+                    
+                    <span class="meta">
+                         作者 小明
+                        <span>
+                          日期 2017-03-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Intellij IDEA"
+                           title="Intellij IDEA">Intellij IDEA</a>
+                        
+                        <a class="tag" href="/tags/#tomcat"
+                           title="tomcat">tomcat</a>
+                        
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="post-title-haojen">
+        <span>
+            Intellij IDEA 使用 Tomcat 异常
+        </span>
+    </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- archive list -->
-            
-				
-				
-				
-					
-					
-					<div class="archive archive-year" data-date="2017">
-						<h2 class="archive-title">
-						<span class="fa fa-archive">
-							<a href="/archives/2017">2017</a>
-						</span>
-						</h2>
-				
-				
-					
-					
-					<div class="archive archive-month" data-date="201703">
-						<h3 class="archive-title">
-							<a href="/archives/2017/03">03</a>
-						</h3>
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2017/03/24/intellij-tomcat-can-t-debug/">
-                        <h4 class="post-title">
-                            Intellij IDEA 使用 Tomcat 异常
-                        </h4>
-                        
-                    </a>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="Intellij-IDEA-使用-Tomcat-异常"><a href="#Intellij-IDEA-使用-Tomcat-异常" class="headerlink" title="Intellij IDEA 使用 Tomcat 异常"></a>Intellij IDEA 使用 Tomcat 异常</h2><p>使用 Tomcat debug 时出现如下异常<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Server is not connected. Deploy is not available</div></pre></td></tr></table></figure></p>
+<p>表现为 Tomcat 能启动，但项目不能部署。<br>后来发现原因在于在 tomcat/bin 目录下加了一个 <code>setenv.bat</code> 文件，本意是用于设置JVM参数<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">set</span> JAVA_OPTS=-server -Xmx768m -XX:MaxPermSize=256M</div></pre></td></tr></table></figure></p>
+<p>这导致从 IDEA 启动 Tomcat 时，IDEA 生成的 JAVA_OPTS 参数被覆盖，导致连接不上 Tomcat。<br>解决办法是将 <code>setenv.bat</code> 中的命令改为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">set &quot;JAVA_OPTS=%JAVA_OPTS% -server -Xmx768m -XX:MaxPermSize=256M&quot;</div></pre></td></tr></table></figure></p>
+<p>这样保证不会覆盖参数，而是将参数加到后面。<br>这个问题也给我们启示，设置环境变量时应该考虑是否存在覆盖问题。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/23/hello-world/" data-toggle="tooltip" data-placement="top"
+                           title="使用Github+Hexo+七牛云实现个人博客搭建">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Intellij-IDEA-使用-Tomcat-异常"><span class="toc-text">Intellij IDEA 使用 Tomcat 异常</span></a></li></ol>
                 </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2017/03/23/hello-world/">
-                        <h4 class="post-title">
-                            使用Github+Hexo+七牛云实现个人博客搭建
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
+            </div>
         </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Intellij IDEA"
+                           title="Intellij IDEA">Intellij IDEA</a>
+                        
+                        <a class="tag" href="/tags/#tomcat"
+                           title="tomcat">tomcat</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-</div>
+</article>
+
+
+
+
+
 
 <!-- Footer -->
 <!-- Footer -->

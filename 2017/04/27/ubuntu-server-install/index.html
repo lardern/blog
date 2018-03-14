@@ -80,7 +80,7 @@
                         
 							
                         <li>
-                            <a href="/tags/">tags</a>
+                            <a href="/works/">works</a>
                         </li>
 							
 						
@@ -88,7 +88,7 @@
                         
 							
                         <li>
-                            <a href="/works/">works</a>
+                            <a href="/tags/">tags</a>
                         </li>
 							
 						
@@ -193,13 +193,32 @@
 </ol>
 <h2 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h2><p>安装好之后登录系统，默认状态下 IP 地址是自动获取的，如果需要配置静态 IP 地址，可以通过修改 <code>/etc/network/interfaces</code> 文件。<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># The primary network interface</div><div class="line">auto enp4s0</div><div class="line">iface enp4s0 inet static</div><div class="line">address 172.16.6.202</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 172.16.6.1</div></pre></td></tr></table></figure></p>
 <p>修改完后，需要重启机器（使用<code>reboot</code>命令）。</p>
+<h2 id="配置时区"><a href="#配置时区" class="headerlink" title="配置时区"></a>配置时区</h2><ol>
+<li><p>运行<code>tzselect</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo tzselect</div></pre></td></tr></table></figure>
+</li>
+<li><p>复制文件到/etc目录下<br><code>sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime</code></p>
+</li>
+<li><p>更新时间<br><code>sudo ntpdate time.windows.com</code></p>
+</li>
+</ol>
+<h2 id="笔记本配置合盖不休眠"><a href="#笔记本配置合盖不休眠" class="headerlink" title="笔记本配置合盖不休眠"></a>笔记本配置合盖不休眠</h2><p>修改 <code>/etc/systemd/logind.conf</code><br>将 <code>#HandleLidSwitch=suspend</code><br>改为 <code>HandleLidSwitch=ignore</code><br>重启 Login Manager 服务<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo systemctl restart systemd-logind</div></pre></td></tr></table></figure></p>
 <h2 id="安装-SSH-Server"><a href="#安装-SSH-Server" class="headerlink" title="安装 SSH Server"></a>安装 SSH Server</h2><p>如果需要远程访问主机的，应先安装 SSH 服务器：<br><code>sudo apt-get install openssh-server</code><br>安装完后会自动运行，可以检查一下：<br><code>ps -ef|grep ssh</code><br>能看到如下内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">root      2412     1  0 02:29 ?        00:00:00 /usr/sbin/sshd -D</div></pre></td></tr></table></figure></p>
-<h2 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h2><p><a href="https://docs.docker.com/engine/installation/linux/ubuntu/" target="_blank" rel="external">Docker安装指南</a></p>
+<h2 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h2><p><a href="https://docs.docker.com/engine/installation/linux/ubuntu/" target="_blank" rel="external">Docker安装指南</a><br><a href="https://yeasy.gitbooks.io/docker_practice/content/swarm/" target="_blank" rel="external">Docker Swarm</a></p>
+<h3 id="开启-Docker-tcp-监听"><a href="#开启-Docker-tcp-监听" class="headerlink" title="开启 Docker tcp 监听"></a>开启 Docker tcp 监听</h3><p>默认Docker 守护进程只会监听socket，不会监听任何 TCP 端口，如果要使用 Remote API 访问的话，需要开启端口监听。<br>正常情况下，在 Ubuntu 里修改 <code>/etc/default</code> 就可以了：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DOCKER_OPTS=&quot; -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock&quot;</div></pre></td></tr></table></figure></p>
+<p>但在 Ubuntu Server 16.04 里却不起作用，网上搜索得到下面的方法解决：<br>打开/lib/systemd/system/docker.service 文件 添加一行<br><code>EnvironmentFile=-/etc/default/docker</code><br>并修改 <code>ExecStart=/usr/bin/docker daemon -H fd://</code><br>改成<br><code>ExecStart=/usr/bin/docker daemon -H fd:// $DOCKER_OPTS</code></p>
+<p>这样才可以使用/etc/default/docker 里定义的DOCKER_OPTS参数，然后执行：<br><code>systemctl daemon-reload</code><br><code>systemctl restart docker</code></p>
+<p>成功解决。<br>参考：<a href="http://blog.sina.com.cn/s/blog_979b9b9e0102wl1l.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_979b9b9e0102wl1l.html</a></p>
 
                 <hr>
                 
 
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/07/10/ip-scan/" data-toggle="tooltip" data-placement="top"
+                           title="CMD命令行下扫描IP地址">&larr; Previous Post</a>
+                    </li>
                     
                     
                     <li class="next">
@@ -217,7 +236,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu-Server-16-04-2-安装"><span class="toc-text">Ubuntu Server 16.04.2 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载镜像"><span class="toc-text">下载镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作安装U盘"><span class="toc-text">制作安装U盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始安装"><span class="toc-text">开始安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置网络"><span class="toc-text">配置网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-SSH-Server"><span class="toc-text">安装 SSH Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Docker"><span class="toc-text">安装 Docker</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu-Server-16-04-2-安装"><span class="toc-text">Ubuntu Server 16.04.2 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载镜像"><span class="toc-text">下载镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作安装U盘"><span class="toc-text">制作安装U盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始安装"><span class="toc-text">开始安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置网络"><span class="toc-text">配置网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置时区"><span class="toc-text">配置时区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔记本配置合盖不休眠"><span class="toc-text">笔记本配置合盖不休眠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-SSH-Server"><span class="toc-text">安装 SSH Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Docker"><span class="toc-text">安装 Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开启-Docker-tcp-监听"><span class="toc-text">开启 Docker tcp 监听</span></a></li></ol></li></ol></li></ol>
                 </div>
             </div>
         </div>
